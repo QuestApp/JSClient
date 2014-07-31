@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quest</title>
+
+    <!-- Bootstrap -->
+    <link href="assets/css/bootstrap.lumen.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+      html, body, #view, #container-main, #map-canvas {
+        height: 100%;
+      }
+      body {
+        padding-top: 52px;
+        padding-bottom: 50px;
+      }
+      #view {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="container-main" class="container">
+      Loading
+    </div>
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="assets/js/Vendor/jquery-1.11.0.min.js"></script>
+    <!-- Our QueryString jQuery extension -->
+    <script src="assets/js/Vendor/jquery.querystring.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="assets/js/Vendor/bootstrap.min.js"></script>
+    <!-- Lo-dash, an improved version of underscore.js, on which backbone depends -->
+    <script src="assets/js/Vendor/lodash.min.js"></script>
+    <!-- Backbone, the JS App Toolkit -->
+    <script src="assets/js/Vendor/backbone.min.js"></script>
+    <!-- Twig.js, templating engine -->
+    <script src="assets/js/Vendor/twig.min.js"></script>
+    <!-- Google Maps Integration -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCk60-iJUkP-YPypbZM65a2EsCe4e1K3Sc"></script>
+    <script src="assets/js/questMap.js"></script>
+    <!-- Backbone Binder extensions -->
+    <script src="assets/js/Vendor/Backbone.ModelBinder.min.js"></script>
+    <script src="assets/js/Vendor/Backbone.CollectionBinder.min.js"></script>
+    <!-- Our Backbone Models & Views -->
+    <script src="assets/js/Models/QuestModel.js"></script>
+    <script src="assets/js/Models/QuestionModel.js"></script>
+    <script src="assets/js/Views/AppView.js"></script>
+    <script src="assets/js/Views/QuestListView.js"></script>
+    <script src="assets/js/Views/QuestMapView.js"></script>
+    <script src="assets/js/Views/QuestQuestionView.js"></script>
+    <!-- Our App-like js file -->
+    <script src="assets/js/questApp.js"></script>
+    
+    <!-- Sample function -->
+    <script type="text/javascript">
+    $.ajaxSetup({
+      //headers: { 'Authorization' :'Basic amVmZnJleTpqZWZm' }
+    });
+    $(function(){
+      window.Quest = new QuestModel({id: $.QueryString['questId']});
+
+      window.App = new AppView({model: window.Quest});
+
+      window.Quest.on("sync", function(){ window.App.render(); });
+      window.Quest.Questions.on("sync", function(){ window.App.render(); });
+
+      window.Quest.fetch();
+      window.Quest.Questions.fetch();
+      
+      var map;
+      //google.maps.event.addDomListener(window, 'load', initialize);
+
+      var AppRouter = Backbone.Router.extend({
+
+        routes: {
+          "list":                 "list",
+          "map":                  "map",
+          "question/:id":         "question"
+        },
+
+        list: function() {
+          App.renderQuestionsList();
+        },
+
+        map: function() {
+          App.renderQuestionsMap();
+        },
+
+        question: function(id) {
+          App.renderQuestion(id);
+        }
+
+      });
+
+      window.Router = new AppRouter();
+      Backbone.history.start({pushState: false});
+    });
+    </script>
+  </body>
+</html>

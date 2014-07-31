@@ -1,0 +1,18 @@
+<html>
+<head>
+	<title>Quest App Landing</title>
+	<script src="assets/js/Vendor/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+	<a href="javascript:launch()">Launch Quest</a>
+	<p><strong>Quest Server Address</strong><br><input type="text" id="server" /></p>
+	<p><strong>Quest ID</strong><br><input type="text" id="questId" /></p>
+	<script type="text/javascript">
+	function launch(){
+		var srv 	= $("#server").val();
+		var questId	= $("#questId").val();
+		window.location = "quest.html?srv="+srv+"&questId="+questId;
+	}
+	</script>
+</body>
+</html>
