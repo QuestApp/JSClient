@@ -4,7 +4,7 @@
 	<script src="assets/js/Vendor/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-	<form action="quest.html" method="get" enctype="text/plain">
+	<form action="quest.html" method="get" enctype="text/plain" id="form">
 		<p>
 			<strong>Quest Server Address</strong><br>
 			<input type="text" id="server" name="srv" value="http://server.quest.jeffenmau.org" required />
@@ -13,7 +13,32 @@
 			<strong>Quest ID</strong><br>
 			<input type="text" id="questId" name="questId" required/>
 		</p>
+		<input type="hidden" id="authDigest" name="authDigest"/>
 		<button type="submit" value="Load Quest">Load Quest</button>
 	</form>
+	<form>
+		<p>
+			<strong>User Name</strong><br>
+			<input type="text" id="user" name="user"/>
+		</p>
+		<p>
+			<strong>Password</strong><br>
+			<input type="password" id="password" name="password"/>
+		</p>		
+	</form>
+	<script type="text/javascript">
+	function base_auth() {
+	  var tok = $("#user").val() + ':' + $("#password").val();
+	  var hash = btoa(tok);
+	  return hash;
+	}
+
+	$("#form").submit(function(e){
+	    e.preventDefault();
+	    var form = this;
+	    $("#authDigest").val(base_auth())
+        form.submit(); // submit bypassing the jQuery bound event
+	});	
+	</script>
 </body>
 </html>
