@@ -73,6 +73,9 @@
       headers: { 'Authorization' :'Basic '+$.QueryString['authDigest'] }
     });
     $(function(){
+      window.Router = new AppRouter();
+      Backbone.history.start({pushState: false});
+
       window.Quest = new QuestModel({id: $.QueryString['questId']});
 
       window.App = new AppView({model: window.Quest});
