@@ -64,6 +64,8 @@
     <script src="assets/js/Views/QuestQuestionView.js"></script>
     <!-- Our App-like js file -->
     <script src="assets/js/questApp.js"></script>
+    <!-- And it's Router -->
+    <script src="assets/js/questRouter.js"></script>    
     
     <!-- Sample function -->
     <script type="text/javascript">
@@ -80,34 +82,12 @@
 
       window.Quest.fetch();
       window.Quest.Questions.fetch();
-      
-      var map;
-      //google.maps.event.addDomListener(window, 'load', initialize);
-
-      var AppRouter = Backbone.Router.extend({
-
-        routes: {
-          "list":                 "list",
-          "map":                  "map",
-          "question/:id":         "question"
-        },
-
-        list: function() {
-          App.renderQuestionsList();
-        },
-
-        map: function() {
-          App.renderQuestionsMap();
-        },
-
-        question: function(id) {
-          App.renderQuestion(id);
-        }
-
-      });
 
       window.Router = new AppRouter();
       Backbone.history.start({pushState: false});
+      
+      var map;
+      //google.maps.event.addDomListener(window, 'load', initialize);
     });
     </script>
   </body>
