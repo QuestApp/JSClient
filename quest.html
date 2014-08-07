@@ -53,9 +53,11 @@
     <!-- Backbone Binder extensions -->
     <script src="assets/js/Vendor/Backbone.ModelBinder.min.js"></script>
     <script src="assets/js/Vendor/Backbone.CollectionBinder.min.js"></script>
-    <!-- Our Backbone Models & Views -->
+    <!-- Our Backbone Models -->
     <script src="assets/js/Models/QuestModel.js"></script>
     <script src="assets/js/Models/QuestionModel.js"></script>
+    <script src="assets/js/Models/AnswerModel.js"></script>
+    <!-- Our Backbone Views -->
     <script src="assets/js/Views/AppView.js"></script>
     <script src="assets/js/Views/QuestListView.js"></script>
     <script src="assets/js/Views/QuestMapView.js"></script>
@@ -66,7 +68,7 @@
     <!-- Sample function -->
     <script type="text/javascript">
     $.ajaxSetup({
-      //headers: { 'Authorization' :'Basic amVmZnJleTpqZWZm' }
+      headers: { 'Authorization' :'Basic '+$.QueryString['authDigest'] }
     });
     $(function(){
       window.Quest = new QuestModel({id: $.QueryString['questId']});
