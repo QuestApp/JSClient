@@ -73,9 +73,6 @@
       headers: { 'Authorization' :'Basic '+$.QueryString['authDigest'] }
     });
     $(function(){
-      window.Router = new AppRouter();
-      Backbone.history.start({pushState: false});
-
       window.Quest = new QuestModel({id: $.QueryString['questId']});
 
       window.App = new AppView({model: window.Quest});
@@ -85,11 +82,12 @@
 
       window.Quest.fetch();
       window.Quest.Questions.fetch();
+      
+      var map;
 
       window.Router = new AppRouter();
       Backbone.history.start({pushState: false});
-      
-      var map;
+
       //google.maps.event.addDomListener(window, 'load', initialize);
     });
     </script>
