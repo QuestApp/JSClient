@@ -3,7 +3,8 @@ var AppRouter = Backbone.Router.extend({
   routes: {
     "list":                 "list",
     "map":                  "map",
-    "question/:id":         "question"
+    "question/:id":         "question",
+    "question/:id/answer":  "questionAnswer"
   },
 
   list: function() {
@@ -16,6 +17,10 @@ var AppRouter = Backbone.Router.extend({
 
   question: function(id) {
     App.renderQuestion(id);
+  },
+
+  questionAnswer: function(id) {
+    App.renderAnswer(id);
   }
 
 });

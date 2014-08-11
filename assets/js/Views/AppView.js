@@ -46,6 +46,12 @@ var AppView = Backbone.View.extend({
 
   renderQuestion: function(id){
     window.QuestionView = new QuestQuestionView({model: this.model.Questions.get(id)});
+    this.model.Questions.get(id).Answer.fetch();
     return window.QuestionView.render();
+  },
+
+  renderAnswer: function(id){
+    window.AnswerView = new QuestAnswerView({model: this.model.Questions.get(id).Answer});
+    return window.AnswerView.render();
   }
 });

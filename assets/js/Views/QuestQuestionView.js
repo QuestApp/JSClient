@@ -20,6 +20,6 @@ var QuestQuestionView = Backbone.View.extend({
     addQuestion(this.model.toJSON());
     centerQuestion(this.model.toJSON());
 
-    return html;
+    return this;
   }
 });

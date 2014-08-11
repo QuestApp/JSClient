@@ -1,13 +1,11 @@
 var QuestModel = Backbone.Model.extend({
 
-  urlRoot:    $.QueryString['srv'] + "/api/quests/",
+	urlRoot:    $.QueryString['srv'] + "/api/quests/",
 
-  constructor: function() {
-    this.Questions =  new Backbone.Collection({
-                        model: QuestionModel
-                      })
-    this.Questions.url = function(){return Quest.url() + "/questions"};
-    Backbone.Model.apply(this, arguments);
-  },
+	constructor: function() {
+	this.Questions =  new QuestionsCollection;
+	//this.Questions.url = function(){return Quest.url() + "/questions"};
+	Backbone.Model.apply(this, arguments);
+	}
 
 });
