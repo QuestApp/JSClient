@@ -2,12 +2,13 @@
 <head>
 	<title>Quest App Landing</title>
 	<script src="assets/js/Vendor/jquery-1.11.0.min.js"></script>
+	<script src="assets/js/Vendor/jquery.querystring.js"></script>
 </head>
 <body>
 	<form action="quest.html" method="get" enctype="text/plain" id="form">
 		<p>
 			<strong>Quest Server Address</strong><br>
-			<input type="text" id="server" name="srv" value="http://server.quest.jeffenmau.org" required />
+			<input type="text" id="srv" name="srv" value="http://server.quest.jeffenmau.org" required />
 		</p>
 		<p>
 			<strong>Quest ID</strong><br>
@@ -27,6 +28,12 @@
 		</p>		
 	</form>
 	<script type="text/javascript">
+	function valFromQueryParam(param){
+		if($.QueryString[param]){
+			$('#'+param).val($.QueryString[param]);
+		}
+	}
+
 	function base_auth() {
 	  var tok = $("#user").val() + ':' + $("#password").val();
 	  var hash = btoa(tok);
@@ -38,7 +45,15 @@
 	    var form = this;
 	    $("#authDigest").val(base_auth())
         form.submit(); // submit bypassing the jQuery bound event
-	});	
+	});
+
+	$(function(){
+		valFromQueryParam('srv');
+		valFromQueryParam('questId');
+		valFromQueryParam('authDigest');
+		valFromQueryParam('user');
+		valFromQueryParam('password');
+	})
 	</script>
 </body>
 </html>
