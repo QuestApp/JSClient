@@ -24,7 +24,7 @@ var AppView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(QuestTpl.render({quest: this.model.attributes }));
+    this.$el.html(QuestTpl.render({quest: this.model.attributes, server: $.QueryString['srv'] }));
 
     window.ListView = new QuestListView({model: this.model});
     window.MapView = new QuestMapView({model: this.model});
