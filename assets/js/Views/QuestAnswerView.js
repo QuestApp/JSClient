@@ -20,7 +20,7 @@ var QuestAnswerView = Backbone.View.extend({
   },
 
   save: function(){
-    return this.model.save('questionID','value', {
+    return this.model.save([], {
       success: function(){ alert('Answer Submitted!'); }, 
       error: function(){ alert('Error while saving Answer'); }
     });
