@@ -1,8 +1,11 @@
 <div>
-	<table>
+	<table class="table table-striped">
 	{% for question in questions %}
-	  <tr><td rowspan="2"><img src="{{ question.question_type.icon }}" style="max-height: 30px;"></td><td><small>{{ question.location_human }}</small></td></tr>
-	  <tr><td><strong><a href='#question/{{ question.id }}'>{{ question.summary }}</a></strong></td></tr>
+	  <tr>
+		  <td style="width: 50px;"><img src="{{ question.question_type.icon }}" style="max-height: 50px; max-width: 50px;"></td>
+		  <td><small>{{ question.location_human }}</small><br />
+		  <strong><a href='#question/{{ question.id }}'>{{ question.summary }}</a></strong></td>
+	  </tr>
 	{% endfor %}
 	</table>
 </div>
