@@ -7,5 +7,8 @@
     <p class="lead">{{question.location_human|title}}</p>
     <p>{{question.location_coord}}</p>
     <h1>{{question.summary|capitalize}}</h1>
+
+    {% if question.answer_type %}
     <p><a href="#question/{{question.id}}/answer" class="btn btn-lg btn-success">Submit an Answer</a></p>
+    {% endif %}
 </div>

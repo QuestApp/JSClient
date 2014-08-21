@@ -1,8 +1,20 @@
+{% if answer.question.answer_type %}
 <div id='answer-container'>
+	{% if answer.question.answer_type == 'txt' %}
     <p>
-    	<input type="text" name="value" value="{{answer.value}}">
+    	<input type="text" name="value" value="{{ answer.value }}">
 	</p>
+	{% elseif answer.question.answer_type == 'pic' %}
+    <p>
+    	{% if answer.value %}
+	    	{{ answer.value }}
+    	{% endif %}
+    	<input type="file" name="value" value="">
+	</p>
+	{% endif %}
 	<p>
-	    <button type="button"  class="btn submit-answer btn-lg btn-success">Submit Answer!</button>
+	    <button type="button"  class="btn submit-answer btn-lg btn-success"
+	    {% if answer.quest.allow_resubmit != true %} disabled {% endif %} >Submit Answer!</button>
     </p>
 </div>
+{% endif %}

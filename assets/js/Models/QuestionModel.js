@@ -5,6 +5,8 @@ var QuestionModel = Backbone.Model.extend({
     this.Answer = new AnswerModel();
   	Backbone.Model.apply(this, arguments);
   	this.Answer.set('questionID', this.get('id'));
+  	this.Answer.set('question', this.toJSON());
+  	this.Answer.set('quest', window.Quest.toJSON());
   }
 
 });
