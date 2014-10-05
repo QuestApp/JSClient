@@ -1,5 +1,6 @@
 {% if answer.question.answer_type %}
 <div id='answer-container' role="form">
+	<form enctype="multipart/form-data" method="POST" id="answerForm" action="{{ formAction }}" target="answerSubmitFrame">
 	{% if answer.question.answer_type == 'txt' %}
     <p>
     	<input type="text" name="value" value="{{ answer.value }}" class="form-control">
@@ -16,5 +17,7 @@
 	    <button type="button"  class="btn submit-answer btn-lg btn-success btn-block"
 	    {% if answer.quest.allow_resubmit != true and answer.value != null %} disabled {% endif %} >Submit Answer!</button>
     </p>
+	</form>
 </div>
+<iframe height="0" width="0" border="0" name="answerSubmitFrame">
 {% endif %}

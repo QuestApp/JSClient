@@ -13,16 +13,13 @@ var QuestAnswerView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(AnswerTpl.render({answer: this.model.attributes}));
+    this.$el.html(AnswerTpl.render({answer: this.model.attributes, formAction: this.model.url()}));
     this._modelBinder.bind(this.model, this.el);
     console.log('Answer Rendered');
     return this;
   },
 
   save: function(){
-    return this.model.save([], {
-      success: function(){ alert('Answer Submitted!'); }, 
-      error: function(){ alert('Error while saving Answer'); }
-    });
+	  return $('form#answerForm').submit();
   }
 });
