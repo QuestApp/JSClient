@@ -14,7 +14,7 @@
 	{% endif %}
 	<p>
 	    <button type="button"  class="btn submit-answer btn-lg btn-success btn-block"
-	    {% if answer.quest.allow_resubmit != true %} disabled {% endif %} >Submit Answer!</button>
+	    {% if answer.quest.allow_resubmit != true and answer.value != null %} disabled {% endif %} >Submit Answer!</button>
     </p>
 </div>
 {% endif %}
