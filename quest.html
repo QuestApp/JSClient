@@ -48,6 +48,7 @@
     <script src="assets/js/Vendor/jquery-1.11.0.min.js"></script>
     <!-- Our QueryString jQuery extension -->
     <script src="assets/js/Vendor/jquery.querystring.js"></script>
+    <script src="assets/js/Vendor/jquery.cookie.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="assets/js/Vendor/bootstrap.min.js"></script>
     <!-- Lo-dash, an improved version of underscore.js, on which backbone depends -->
@@ -101,6 +102,21 @@
 
       //google.maps.event.addDomListener(window, 'load', initialize);
     });
+	
+	function retrieveQuestClientID(){
+		var questClientID = null;
+		
+		if($.cookie('questClientID') != undefined){
+			questClientID = $.cookie('questClientID');
+		}else{
+			questClientID = Math.floor(Math.random()*1111111111111);
+		}
+		
+		$.cookie('questClientID', questClientID, { expires: 30, path: '/' });
+		window.questClientID = questClientID;
+
+		return questClientID;
+	}
     </script>
   </body>
 </html>

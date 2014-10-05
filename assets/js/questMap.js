@@ -12,20 +12,21 @@ function setCenter(lat, lng){
 
 function updateGeoPosition(force,loop){
 
-	if($('#follow_location').is(':checked') || force){
-		if(navigator.geolocation) {
-			console.log('updating position');
-			navigator.geolocation.getCurrentPosition(function(position) {
-		      setCenter(position.coords.latitude, position.coords.longitude);
-		      console.log('updated position');
-		    }, function() {
-		      handleNoGeolocation(true);
-		    });
-		} else {
-			// Browser doesn't support Geolocation
-			handleNoGeolocation(false);
-		}
-	};
+	if(navigator.geolocation) {
+		console.log('updating position');
+		navigator.geolocation.getCurrentPosition(function(position) {
+			if($('#follow_location').is(':checked') || force){
+			  setCenter(position.coords.latitude, position.coords.longitude);
+			};
+			$.ajax($.QueryString['srv']+'/api/track.json?latlong='+JSON.stringify([position.coords.latitude, position.coords.longitude])+'&ident='+retrieveQuestClientID());
+			console.log('updated position');
+	    }, function() {
+	      handleNoGeolocation(true);
+	    });
+	} else {
+		// Browser doesn't support Geolocation
+		handleNoGeolocation(false);
+	}
 
 	if(!loop){
 		window.setTimeout(updateGeoPosition, 10000);
