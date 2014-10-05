@@ -106,13 +106,22 @@
 	function retrieveQuestClientID(){
 		var questClientID = null;
 		
-		if($.cookie('questClientID') != undefined){
-			questClientID = $.cookie('questClientID');
+		if(window.location.href.indexOf("android")>0){
+			if(window.localStorage.getItem("questClientID") != undefined){
+				questClientID = window.localStorage.getItem("questClientID");
+			}else{
+				questClientID = Math.floor(Math.random()*1111111111111);
+			}
+			window.localStorage.setItem("questClientID", questClientID);
 		}else{
-			questClientID = Math.floor(Math.random()*1111111111111);
+			if($.cookie('questClientID') != undefined){
+				questClientID = $.cookie('questClientID');
+			}else{
+				questClientID = Math.floor(Math.random()*1111111111111);
+			}		
+			$.cookie('questClientID', questClientID, { expires: 30, path: '/' });	
 		}
 		
-		$.cookie('questClientID', questClientID, { expires: 30, path: '/' });
 		window.questClientID = questClientID;
 
 		return questClientID;
