@@ -1,9 +1,37 @@
-<html>
-<head>
-	<title>Quest App Landing</title>
-	<script src="assets/js/Vendor/jquery-1.11.0.min.js"></script>
-	<script src="assets/js/Vendor/jquery.querystring.js"></script>
-</head>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Quest App Landing</title>
+
+	    <!-- Bootstrap -->
+	    <link href="assets/css/bootstrap.lumen.min.css" rel="stylesheet">
+	
+	    <style type="text/css">
+	      html, body, #view, #container-main, #map-canvas {
+	        height: 100%;
+	      }
+	      body {
+	        padding-top: 52px;
+	        /*padding-bottom: 52px;*/
+	        /*margin-bottom: 50px;*/
+	      }
+	      #view {
+	        margin-top: 10px;
+	        margin-bottom: 10px;
+	      }
+	  
+		  #view .table {
+			  margin-bottom: 60px;
+		  }
+	  
+		  #question-container {
+			  margin-bottom: 60px;
+		  }
+	    </style>
+	</head>
 <body>
 	<form action="quest.html" method="get" enctype="text/plain" id="form">
 		<p>
@@ -27,6 +55,15 @@
 			<input type="password" id="password" name="password"/>
 		</p>		
 	</form>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="assets/js/Vendor/jquery-1.11.0.min.js"></script>
+    <!-- Our QueryString jQuery extension -->
+    <script src="assets/js/Vendor/jquery.querystring.js"></script>
+    <script src="assets/js/Vendor/jquery.cookie.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="assets/js/Vendor/bootstrap.min.js"></script>
+
 	<script type="text/javascript">
 	function valFromQueryParam(param){
 		if($.QueryString[param]){
@@ -44,7 +81,8 @@
 	    e.preventDefault();
 	    var form = this;
 	    $("#authDigest").val(base_auth())
-        form.submit(); // submit bypassing the jQuery bound event
+		location.replace('quest.html?' + $("#form").serialize());
+        //form.submit(); // submit bypassing the jQuery bound event
 	});
 
 	$(function(){
