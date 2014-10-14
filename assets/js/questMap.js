@@ -35,22 +35,10 @@ function updateGeoPosition(force,loop){
 
 function handleNoGeolocation(errorFlag) {
   if (errorFlag) {
-    var content = 'Error: The Geolocation service failed.';
+    console.log('Error: The Geolocation service failed.');
   } else {
-    var content = 'Error: Your browser doesn\'t support geolocation.';
+    console.log('Error: Your browser doesn\'t support geolocation.');
   }
-
-  var lat = 52.0791709;
-  var lng = 4.3114062;
-
-  var options = {
-    map: map,
-    position: new google.maps.LatLng(lat, lng),
-    content: content
-  };
-
-  var infowindow = new google.maps.InfoWindow(options);
-  setCenter(lat, lng);
 }
 
 function addQuestion(question) {
